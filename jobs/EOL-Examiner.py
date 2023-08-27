@@ -15,7 +15,7 @@ class VerifyEOL(Job) :
          name = "Function to compare eol dates with today and filter obsolete devices."
  
  def run (self, data, commit):
-     device = Devices.objects.all()  
+     device = Device.objects.all()  
      eol_date_str = Device.custom_fields.get('eol', None)
  
      obsolete_devices = []                                           #create a list for expired devices
