@@ -1,5 +1,5 @@
 
-from nautobot.dcim.models import Device
+from nautobot.dcim.models import Devices
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
 
@@ -15,13 +15,13 @@ class VerifyEOL(Job) :
          name = "Function to compare eol dates with today and filter obsolete devices."
  
  def run (self, data, commit):
-     device = Device.objects.all()  
-     eol_date_str = Device.Custom_Fields.get('eol', None)
+     device = Devices.objects.all()  
+     eol_date_str = Devices.Custom_Fields.get('eol', None)
  
      obsolete_devices = []                                           #create a list for expired devices
          
-     for device in Device.objects.all():
-             eol_date_str = Device.Custom_Fields.get('eol', None)  
+     for device in Devices.objects.all():
+             eol_date_str = Devices.Custom_Fields.get('eol', None)  
              if eol_date_str:
                  eol_date = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
                  if eol_date < date.today():
