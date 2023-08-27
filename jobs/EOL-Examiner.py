@@ -33,4 +33,3 @@ class VerifyEOL(Job) :
                  for device in obsolete_devices:
                      self.log_failure(device)
  
- jobs = (VerifyEOL)
