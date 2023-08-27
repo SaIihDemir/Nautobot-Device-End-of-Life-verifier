@@ -16,11 +16,11 @@ class VerifyEOL(Job) :
  
  def run (self, data, commit):
      device = Devices.objects.all()  
-     eol_date_str = Devices.custom_fields.get('eol', None)
+     eol_date_str = Device.custom_fields.get('eol', None)
  
      obsolete_devices = []                                           #create a list for expired devices
          
-     for device in Devices.objects.all():
+     for device in Device.objects.all():
              eol_date_str = Device.custom_fields.get('eol', None)  
              if eol_date_str:
                  eol_date = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
