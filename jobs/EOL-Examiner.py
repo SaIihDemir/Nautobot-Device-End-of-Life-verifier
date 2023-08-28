@@ -13,7 +13,7 @@ class VerifyEOL(Job) :
              """
          name = "Function to compare eol dates with today and filter obsolete devices."
  
- def eol (self):
+ def run (self, data, commit):
      device = Device.objects.all()  
      eol_date_str = Device.eol.get('eol', None)
  
