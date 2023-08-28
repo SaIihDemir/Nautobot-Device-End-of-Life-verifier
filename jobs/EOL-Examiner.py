@@ -1,5 +1,4 @@
 
-from nautobot.dcim.models.device import Custom_Fields
 from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
@@ -17,7 +16,7 @@ class VerifyEOL(Job) :
  
  def run (self, data, commit):
      device = Device.objects.all()  
-     eol_date_str = Custom_Fields.eol.get('eol', None)
+     eol_date_str = Device.eol.get('eol', None)
  
      obsolete_devices = []                                           #create a list for expired devices
          
