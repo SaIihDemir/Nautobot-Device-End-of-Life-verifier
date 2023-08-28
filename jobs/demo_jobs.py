@@ -39,6 +39,6 @@ class GetShowVersion(Job):
         device = data["device"]
 
         self.log_debug(device)
-
+        
 
 jobs = (GetShowVersion)
