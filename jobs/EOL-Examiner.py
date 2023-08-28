@@ -1,4 +1,3 @@
-from nautobot.custom_field import Eol
 from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
