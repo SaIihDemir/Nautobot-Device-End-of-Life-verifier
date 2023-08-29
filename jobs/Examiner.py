@@ -11,7 +11,7 @@ class VerifyEOL(Job) :
              1.Lists every device with a expired EOL(End-of-Life).
              2.Shows the contact person, whos EOL has expired.
              """
-         name = "Function to compare eol date with today and filter obsolete devices."
+         name = "Function : compare eol date with today and filter obsolete devices."
  
  def run (self, data, commit):
      device = Device.objects.all()  
