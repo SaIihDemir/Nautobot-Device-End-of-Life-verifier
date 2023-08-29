@@ -3,7 +3,7 @@ from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import json
 
-class VerifyEOL(Job) :
+class Verifyer(Job) :
  class Meta:
          description = """
              this job does the following                           
