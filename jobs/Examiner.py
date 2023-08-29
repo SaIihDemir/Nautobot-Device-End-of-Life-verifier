@@ -6,8 +6,6 @@ import json
 class Verifyer(Job) :
  class Meta:
          description = """
-             this job does the following                           
-             
              1.Lists every device with a expired EOL(End-of-Life).
              2.Shows the contact person, whos EOL has expired.
              """
