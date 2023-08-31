@@ -18,11 +18,11 @@ class Verifyer(Job) :
   
      obsolete_devices = []                                           #create a list for expired devices
          
-     for device in Device.objects.all():
-             eol_date_str = CustomField.objects.all()  
-             if eol_date_str:
-                 eol_date = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
-                 if eol_date < date.today():
+     for customfields in eol_date_str:
+         for eol in customfields:
+           if eol:
+                 eol = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
+                 if eol < date.today():
                      obsolete_devices.append(display)
          
  
