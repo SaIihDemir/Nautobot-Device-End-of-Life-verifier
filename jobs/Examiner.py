@@ -25,7 +25,7 @@ def run(self, data, commit):
          
  
         if obsolete_devices:
-                 self.log_success("Check the following obsolete devices:")
+                 self.log_failure("Check the following obsolete devices:")
                  for device in obsolete_devices:
-                     self.log_success(device)
+                     self.log_failure(device)
  
