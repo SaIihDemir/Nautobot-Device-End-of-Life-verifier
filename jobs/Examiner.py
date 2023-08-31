@@ -15,7 +15,7 @@ class Verifyer(Job) :
 def run(self, data, commit):
         eol_field_name = "eol"  
         obsolete_devices = []
-        self.log_info(Device.objects.get(name='ams01-dist-01 12345').interfaces.all())
+        self.log_debug("message")
  
         for device in Device.objects.all():
             eol_field = device.get(eol_field_name)
