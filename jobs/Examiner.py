@@ -1,5 +1,6 @@
 from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
+from nautobot.extras.models import CustomField
 from datetime import datetime, date
 import json
 
@@ -13,12 +14,12 @@ class Verifyer(Job) :
  
  def run (self, data, commit):
      device = Device.objects.all()  
-     eol_date_str = Device.customfields.CustomFieldModels.objects.all()
+     eol_date_str = CustomField.objects.all()
   
      obsolete_devices = []                                           #create a list for expired devices
          
      for device in Device.objects.all():
-             eol_date_str = Device.eol.get('eol', None)  
+             eol_date_str = CustomField.objects.all()  
              if eol_date_str:
                  eol_date = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
                  if eol_date < date.today():
