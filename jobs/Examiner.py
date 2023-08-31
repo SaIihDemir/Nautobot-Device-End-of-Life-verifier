@@ -19,8 +19,8 @@ def run(self, data, commit):
  
         for device in Device.objects.all():
             eol_field = device.get(eol_field_name)
-            log_info(eol_field)
-            log_info(device.all())
+            self.log_info(eol_field)
+            self.log_info(device.all())
             if eol_field:
                 eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
                 if eol < date.today():
