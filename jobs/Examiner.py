@@ -12,18 +12,16 @@ class Verifyer(Job) :
              """
          name = "Function : compare eol date with today and filter obsolete devices."
  
- def run (self, data, commit):
-     device = Device.objects.all()  
-     eol_date_str = CustomField.objects.all()
-  
-     obsolete_devices = []                                           #create a list for expired devices
-         
-     for customfields in eol_date_str:
-         for eol in customfields:
-           if eol:
-                 eol = datetime.strptime(eol_date_str, '%Y-%m-%d').date()
-                 if eol < date.today():
-                     obsolete_devices.append(display)
+def run(self, data, commit):
+        eol_field_name = "EOL Date"  # Replace with the actual name of the EOL custom field
+        obsolete_devices = []
+
+        for device in Device.objects.all():
+            eol_field = device.custom_field_data.get(eol_field_name)
+            if eol_field:
+                eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
+                if eol < date.today():
+                    obsolete_devices.append(device)
          
  
      if obsolete_devices:
