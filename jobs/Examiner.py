@@ -13,7 +13,7 @@ class Verifyer(Job) :
  
  def run (self, data, commit):
      device = Device.objects.all()  
-     eol_date_str = Device.customfield.CustomFieldModels.objects.all()
+     eol_date_str = Device.customfields.CustomFieldModels.objects.all()
   
      obsolete_devices = []                                           #create a list for expired devices
          
