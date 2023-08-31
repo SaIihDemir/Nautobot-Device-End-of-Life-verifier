@@ -22,12 +22,12 @@ def run(self, data, commit):
                 eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
                 if eol < date.today():
                     obsolete_devices.append(device)
-                 self.log_debug(e456)
+                        self.log_debug(e456)
          
  
         if obsolete_devices:
                  self.log_failure("Check the following obsolete devices:")
                  for device in obsolete_devices:
                      self.log_failure(device)
-                  self.log_debug(ß08ß9)
+                       self.log_debug(ß08ß9)
  
