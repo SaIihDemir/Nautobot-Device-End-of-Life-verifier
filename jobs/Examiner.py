@@ -11,7 +11,7 @@ class Verifyer(Job) :
              2.Shows the contact person, whos EOL has expired.
              """
          name = "Function : compare eol date with today and filter obsolete devices."
- 
+ self.log_debug(m123)
 def run(self, data, commit):
         eol_field_name = "eol"  # Replace with the actual name of the EOL custom field
         obsolete_devices = []
@@ -22,10 +22,12 @@ def run(self, data, commit):
                 eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
                 if eol < date.today():
                     obsolete_devices.append(device)
+                 self.log_debug(e456)
          
  
         if obsolete_devices:
                  self.log_failure("Check the following obsolete devices:")
                  for device in obsolete_devices:
                      self.log_failure(device)
+                  self.log_debug(ß08ß9)
  
