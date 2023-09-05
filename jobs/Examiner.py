@@ -1,6 +1,5 @@
 from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
-from nautobot.extras.models import CustomField
 from datetime import datetime, date
 
 
