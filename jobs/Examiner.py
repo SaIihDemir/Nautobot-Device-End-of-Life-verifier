@@ -13,7 +13,7 @@ class VerifyEOL(Job) :
          name = "Compare EOL date with today and filter obsolete devices."
          
         
- def run (self, data, commit):
+ def check (self, data, commit):
   for device in Device.objects.all():
             eol = device.cf["eol"]
             obsolete_devices = []
@@ -24,7 +24,7 @@ class VerifyEOL(Job) :
                   obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))
                   self.log_failure(obj=obsolete_devices, message = "HI")                             
   return obsolete_devices
-
+  check(self, data, commit)
                      
                   
                                    
