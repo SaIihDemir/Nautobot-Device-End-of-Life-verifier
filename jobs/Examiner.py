@@ -23,7 +23,7 @@ class VerifyEOL(Job) :
                   obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]])
                   self.log_failure(obj=obsolete_devices, message = "HI")             
                   obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))                
-  
+  return obsolete_devices
 
                      
                   
