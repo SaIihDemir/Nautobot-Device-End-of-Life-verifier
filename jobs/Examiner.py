@@ -26,6 +26,8 @@ class VerifyEOL(Job) :
                         eol = device.cf["contact"], devices
                         self.log_failure(obj=eol, message = "Inform GWDG and the contact about this Device")
                      
+                    return "obsolete_devices"
+                     
                   
                                    
                                    
