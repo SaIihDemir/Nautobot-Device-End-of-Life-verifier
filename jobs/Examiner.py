@@ -2,7 +2,7 @@ from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import csv
-import operator
+import operator import itemgetter
 
 class VerifyEOL(Job) :
  class Meta:
@@ -21,6 +21,7 @@ class VerifyEOL(Job) :
                eol=datetime.strptime(eol, '%Y-%m-%d').date()
                if eol < date.today():
                   obsolete_devices.append([device.cf["contact"],device, device.cf["eol"]])
+                  sorted(obsolete_devices,key=itemgetter(0))
                   self.log_failure(obj=obsolete_devices, message = "HI")                
   return obsolete_devices
                      
