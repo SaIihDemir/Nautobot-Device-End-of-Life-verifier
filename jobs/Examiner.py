@@ -21,11 +21,12 @@ class VerifyEOL(Job) :
                 eol=datetime.strptime(eol, '%Y-%m-%d').date()
                 if eol < date.today():
                     obsolete_devices.append(device)
+                    return obsolete_devices
                  
                     for devices in obsolete_devices:
                         eol = device.cf["contact"], devices
-                        self.log_failure(obj=eol, message = "Inform GWDG and the contact about this Device")
-                        return eol
+                        self.log_failure(obj=obsolete_devices, message = "Inform GWDG and the contact about this Device")
+                        return obsolete_devices
                      
                   
                                    
