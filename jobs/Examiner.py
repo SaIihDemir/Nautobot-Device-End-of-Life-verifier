@@ -15,6 +15,7 @@ def run(self, data, commit):
         obsolete_devices = []
  
         for device in Device.objects.all():
+            self.log_success(obj = device, message = "YOO")
             eol = device.cf["eol"]         
             eol = datetime.strptime(eol, '%Y-%m-%d').date()
             if eol < date.today():
