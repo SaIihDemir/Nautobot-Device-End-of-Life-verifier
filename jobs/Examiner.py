@@ -22,7 +22,15 @@ class VerifyEOL(Job) :
                if eol < date.today():
                   obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]])
                   obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))
-                  self.log_failure(obj=obsolete_devices, message = "HI")                
+                  for device in obsolete_devices:
+                      self.log_failure(obj=device, message = "HI") 
+
+               #with open ('obsolete_devices.csv', 'w' newline = '') as file:
+              # writer = csv.writer(file)
+               #field = ['contact', 'Device', 'EOL']
+             
+             #  writer.writerow(field)
+               
   return obsolete_devices
                      
                      
