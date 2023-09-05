@@ -18,11 +18,11 @@ def run(self, data, commit):
         for device in Device.objects.all():
             eol = device.cf["eol"]         
             eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
-                if eol < date.today():
-                    obsolete_devices.append(device)
+            if eol < date.today():
+               obsolete_devices.append(device)
 
-                for devices in obsolete_devices:
-                    self.log_failure(obj = devices, message = "test")
+            for devices in obsolete_devices:
+                self.log_failure(obj = devices, message = "test")
                  
                                    
                                    
