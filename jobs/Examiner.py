@@ -29,7 +29,9 @@ class VerifyEOL(Job) :
                #field = ['contact', 'Device', 'EOL']
              
              #  writer.writerow(field)
-               
+  sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))
+  for device in sorted_obsolete_devices:
+      self.log_success(obj = device, message = "NEIN")
   return obsolete_devices
                      
                      
