@@ -1,7 +1,6 @@
 from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
-from itertools import groupby
 
 class VerifyEOL(Job) :
  class Meta:
@@ -23,8 +22,9 @@ class VerifyEOL(Job) :
                     obsolete_devices.append(device)
                  
                     for devices in obsolete_devices:
-                        eol = device.cf["contact"], devices, devices.cf["eol"]
-                        self.log_failure(obj=eol, message = "Inform GWDG and the contact about this Device")
+                        contact = device.cf["contact"], devices, devices.cf["eol"]
+                        s_contact = sorted(contact)
+                        self.log_failure(obj= s_contact, message = "Inform GWDG and the contact about this Device")
   return obsolete_devices
                      
                   
