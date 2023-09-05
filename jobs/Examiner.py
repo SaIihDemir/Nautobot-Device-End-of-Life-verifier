@@ -16,7 +16,7 @@ def run(self, data, commit):
  
         for device in Device.objects.all():
             eol = device.cf["eol"]         
-            eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
+            eol = datetime.strptime(eol, '%Y-%m-%d').date()
             if eol < date.today():
                obsolete_devices.append(device)
 
