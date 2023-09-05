@@ -22,7 +22,7 @@ class VerifyEOL(Job) :
                   for devices in obsolete_devices:
                       contact = device.cf["contact"], devices, devices.cf["eol"]
                                       
-  return '\n'.contact
+  return contact
                      
                   
                                    
