@@ -21,11 +21,10 @@ class VerifyEOL(Job) :
                eol=datetime.strptime(eol, '%Y-%m-%d').date()
                if eol < date.today():
                   obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]])
-                
-  obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))
-  self.log_failure(obj=obsolete_devices, message = "HI")                
-  return obsolete_devices
-  run()
+                  self.log_failure(obj=obsolete_devices, message = "HI")             
+                  obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))                
+  
+
                      
                   
                                    
