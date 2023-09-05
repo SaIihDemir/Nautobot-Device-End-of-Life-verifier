@@ -25,8 +25,7 @@ class VerifyEOL(Job) :
                   obsolete_devices.append(device.cf["eol"])
                   obsolete_devices = sorted(obsolete_devices,key=itemgetter(0))
                   self.log_failure(obj=obsolete_devices, message = "HI")                             
-  return obsolete_devices
-  check(self, data, commit)
+
                      
                   
                                    
