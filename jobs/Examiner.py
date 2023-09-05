@@ -2,7 +2,7 @@ from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from nautobot.extras.models import CustomField
 from datetime import datetime, date
-import json
+
 
 class Verifyer(Job) :
  class Meta:
@@ -12,23 +12,25 @@ class Verifyer(Job) :
              """
          name = "Function : compare eol date with today and filter obsolete devices."
   
-def run(self, data, commit):
-        eol_field_name = "eol"  
+def run(self, data, commit):  
         obsolete_devices = []
-        self.log_debug("message")
  
         for device in Device.objects.all():
-            eol_field = device.get(eol_field_name)
-            self.log_info(eol_field)
-            self.log_info(device.all())
-            if eol_field:
-                eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
+            eol = device.cf["eol"]         
+            eol = datetime.strptime(eol_field, '%Y-%m-%d').date()
                 if eol < date.today():
                     obsolete_devices.append(device)
-         
- 
-        if obsolete_devices:
-                 self.log_failure("Check the following obsolete devices:")
-                 for device in obsolete_devices:
-                     self.log_failure(device)
+
+                for devices in obsolete_devices:
+                    self.log_failure(obj = devices, message = "test")
+                 
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                           
  
