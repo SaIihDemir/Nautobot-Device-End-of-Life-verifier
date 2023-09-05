@@ -2,6 +2,7 @@ from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import csv
+import operator
 
 class VerifyEOL(Job) :
  class Meta:
