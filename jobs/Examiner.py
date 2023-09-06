@@ -22,7 +22,7 @@ class VerifyEOL(Job) :
             eol=datetime.strptime(eol, '%Y-%m-%d').date()
             if eol < date.today():
                obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]]) 
-               self.log_failure(obj=obsolete_device, message = "OIOI")
+               self.log_failure(obj=obsolete_devices, message = "OIOI")
          
       if obsolete_devices:
          sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))   
