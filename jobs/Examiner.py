@@ -31,7 +31,7 @@ class VerifyEOL(Job) :
              
                #writer.writerow(field)
             #sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))
-  for x in obsolete_devices
+  for x in obsolete_devices:
       ''.join(x)
   return x
                      
