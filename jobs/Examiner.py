@@ -32,7 +32,7 @@ class VerifyEOL(Job) :
             writer.writerow(field)
             for devices in obsolete_devices:
                 writer.writerow(devices)
-            self.log_success(obj=None , message = "created list with obsolete Devices")  
+      self.log_success(obj=None , message = "created list with obsolete Devices")  
            
            
                      
