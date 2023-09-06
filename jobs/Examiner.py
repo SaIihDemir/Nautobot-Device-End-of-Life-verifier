@@ -31,7 +31,7 @@ class VerifyEOL(Job) :
             field = ['Contact', 'Device', 'EOL']              
             writer.writerow(field) 
             for device in obsolete_devices:
-               writer.writerow(device)
+                writer.writerow(device)
          self.log_success(obj=None , message = "created list with obsolete Devices")     
       else:
             self.log_failure(obj=None, message = "no obsolete Device found")
