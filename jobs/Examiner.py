@@ -14,7 +14,8 @@ class VerifyEOL(Job) :
          
         
  def run (self, data, commit):
-  
+
+      obsolete_devices = []
       for device in Device.objects.all():
          if device: 
             eol = device.cf["eol"]
