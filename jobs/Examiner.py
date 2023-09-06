@@ -26,11 +26,11 @@ class VerifyEOL(Job) :
          
       if obsolete_devices:
          sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))   
-         self.log_success(obj=None , message = "created list with obsolete Devices") 
          with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']              
             writer.writerow(field)
+         self.log_success(obj=None , message = "created list with obsolete Devices") 
             for device in obsolete_devices:
                writer.writerow(device)
       else:
