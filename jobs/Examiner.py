@@ -25,11 +25,11 @@ class VerifyEOL(Job) :
                   self.log_failure(obj=obsolete_devices, message = "HI") 
                   sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))
                 
-               with open ('obsolete_devices.csv', 'w' newline = '') as file:
-               writer = csv.writer(file)
-               field = ['contact', 'Device', 'EOL']
+               #with open ('obsolete_devices.csv', 'w' newline = '') as file:
+               #writer = csv.writer(file)
+               #field = ['contact', 'Device', 'EOL']
              
-               writer.writerow(field)
+               #writer.writerow(field)
             sorted_obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))
   ''.join(obsolete_devices)  
   return obsolete_devices
