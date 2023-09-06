@@ -15,7 +15,7 @@ class VerifyEOL(Job) :
         
  def run (self, data, commit):
 
-     # create list for obsolete devices and add devices, including their contact, name and EOL, whos EOL is exceeded
+     # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
       for device in Device.objects.all():
          if device: 
@@ -24,7 +24,7 @@ class VerifyEOL(Job) :
             if eol < date.today():
                obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]]) 
              
-     # sort obsolete devices by contact       
+     # sort obsolete devices by contact and show log message if we have no obsolete devices    
       if obsolete_devices:
          obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))        
       else:
