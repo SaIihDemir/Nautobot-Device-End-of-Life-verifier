@@ -38,7 +38,7 @@ class VerifyEOL(Job) :
             for devices in obsolete_devices: 
                 writer.writerow(devices)
  
-      self.log_success(obj=None , message = "created list with obsolete Devices")  
+      self.log_success(obj=None , message = "created csv file with obsolete Devices")  
       
       # show obsolete devices in Nautobots Job Output
       return (obsolete_devices)     
