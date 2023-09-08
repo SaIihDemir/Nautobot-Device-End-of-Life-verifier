@@ -38,7 +38,7 @@ class VerifyEOL(Job) :
       for contact_mail in obsolete_devices:
          i += 1
          if contact_mail[0] == obsolete_devices[i][0]:
-            no_duplicate_contact.append([,"",contact_mail[1],contact_mail[2]]) 
+            no_duplicate_contact.append(["",contact_mail[1],contact_mail[2]]) 
          else:
             no_duplicate_contact.append(contact_mail)
           
