@@ -30,8 +30,8 @@ class VerifyEOL(Job) :
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
 
+       
 #new list without duplicate contact-information
-
       no_duplicate_contact = []
 
       i = -2
@@ -41,13 +41,14 @@ class VerifyEOL(Job) :
             no_duplicate_contact.append([[print('')],contact_mail[1],contact_mail[2]]) 
          else:
             no_duplicate_contact.append(contact_mail)
-
-         # Create csv file for obsolete devices
+          
+# Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']
             writer.writerow(field)
             for contact in no_duplicate_contact:
                writer.writerow(contact)
-
+             
+      self.log_succes(obj = None, message = "created obsolete devices csv file")
       return (no_duplicate_contact)     
