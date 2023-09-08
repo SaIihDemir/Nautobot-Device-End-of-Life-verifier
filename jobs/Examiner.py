@@ -50,5 +50,5 @@ class VerifyEOL(Job) :
             for contact in no_duplicate_contact:
                writer.writerow(contact)
              
-      self.log_succes(obj = None, message = "created obsolete devices csv file")
+      self.log_success(obj = None, message = "created obsolete devices csv file")
       return (no_duplicate_contact)     
