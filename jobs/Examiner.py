@@ -30,27 +30,28 @@ class VerifyEOL(Job) :
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
 
-     # create csv file for obsolete devices
+#new list without duplicate contact-information
+
+      no_duplicate_contact = []
+      i=-2
+      for contact in obsolete_devices:
+         i+=1
+         if i >= len(obsolete_devices):
+            i= len(obsolete_devices)-1
+         if contact[0] == obsolete_devices[i][0]:
+            contact[0]=""
+            no_duplicate_contact.append([contact[0],contact[1],contact[2]])
+         else:
+            no_duplicate_contact.append(contact)    
+         
+# create csv file for obsolete devices
+
       with open('obsolete_devices.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            field = ['Contact', 'Device', 'EOL']
-            writer.writerow(field)
-            for devices in obsolete_devices: 
-                writer.writerow(devices)
- 
-      self.log_success(obj=None , message = "created csv file with obsolete Devices")  
-      
-      # show obsolete devices in Nautobots Job Output
-      return (obsolete_devices)     
-           
+         writer = csv.writer(file)
+         field = ['Contact', 'Device', 'EOL']
+         writer.writerow(field)
+         for contact_and_devices in no_duplicate_contact: 
+               writer.writerow(contact_and_devices)
                      
-                     
-                  
-                                   
-                  
-           
-                     
-                     
-                  
-                                   
-                  
+
+      return (no_duplicate_contact)     
