@@ -14,8 +14,6 @@ class VerifyEOL(Job) :
          
         
  def run (self, data, commit):
-
-     # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
       for device in Device.objects.all():
          if device: 
@@ -30,8 +28,6 @@ class VerifyEOL(Job) :
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
 
-       
-#new list without duplicate contact-information
       no_duplicate_contact = []
 
       i = -2
@@ -42,7 +38,6 @@ class VerifyEOL(Job) :
          else:
             no_duplicate_contact.append(contact_mail)
           
-# Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']
