@@ -2,7 +2,7 @@ from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import csv
-from operator import itemgetter
+from operator import attrgetter
 
 class VerifyEOL(Job) :
  class Meta:
@@ -14,36 +14,61 @@ class VerifyEOL(Job) :
          
         
  def run (self, data, commit):
+
+     # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
       for device in Device.objects.all():
          if device: 
             eol = device.cf["eol"]
-            eol=datetime.strptime(eol, '%Y-%m-%d').date()
-            if eol < date.today():
-               obsolete_devices.append([device.cf["contact"],device.name, device.cf["eol"]]) 
+            try:
+               eol=datetime.strptime(eol, '%Y-%m-%d').date()
+               if eol < date.today():
+                  obsolete_devices.append(device) 
+            except Exception as e:
+                self.log_failure("Error parsing EOL date: {}".format(str(e)))
+                continue
              
-     # sort obsolete devices by contact and show log message if we have no obsolete devices    
+# sort obsolete devices by contact and show log message if we have no obsolete devices    
       if obsolete_devices:
-         obsolete_devices=sorted(obsolete_devices,key=itemgetter(0))        
+         sorted_devices = sorted(obsolete_devices, key=lambda x: x.cf["contact"])
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
 
-      no_duplicate_contact = []
-
+       
+#list for contacts with all their devices
+      contact_devices = []
       i = -2
-      for contact_mail in obsolete_devices:
+      j = -1
+      for device in sorted_devices:
          i += 1
-         if contact_mail[0] == obsolete_devices[i][0]:
-            no_duplicate_contact.append(["",contact_mail[1],contact_mail[2]]) 
+         if device.cf["contact"] != sorted_devices[i].cf["contact"]:
+            contact_devices.append([device.cf["contact"],[device]])
+            j += 1
          else:
-            no_duplicate_contact.append(contact_mail)
+            contact_devices[j][1].append(device)
           
+# Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']
             writer.writerow(field)
-            for contact in no_duplicate_contact:
-               writer.writerow(contact)
-             
-      self.log_success(obj = None, message = "created csv file for obsolete devices")
-      return (no_duplicate_contact)     
+            for device in sorted_devices:
+               writer.writerow([device.cf["contact"],device,device.cf["eol"]])
+            self.log_success(obj = None, message = "created csv file for obsolete devices")   
+      emails = []
+      for contact in contact_devices:
+          email = """
+            Sehr geehrte/r {},\n
+            folgende Geräte mit den Bezeichnungen:\n
+            {}\n
+            \n
+            haben ihr EOL erreicht.\n
+            Bitte prüfen Sie folgende Informationen:\n
+            1. Ist das Gerät noch produktiv im Einsatz?\n
+            2. Ist die Herstellergarantie noch aktuell?\n
+            3. Sind alle Softwarekomponenten auf dem aktuellen Stand?\n
+      """.format(contact[0], contact[1])
+          emails.append(email)
+       
+      return'\n'.join(emails)
+           
