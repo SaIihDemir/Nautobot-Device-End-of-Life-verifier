@@ -72,5 +72,5 @@ class VerifyEOL(Job) :
       """.format(contact[0], contact[1])
           emails.append(email)
        
-      return'\n'.join(emails)
+      return(emails)
            
