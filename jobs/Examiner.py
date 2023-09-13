@@ -61,7 +61,7 @@ class VerifyEOL(Job) :
       for contact in contact_devices:
           email = """
             Sehr geehrte/r {},
-            folgende Geräte mit den Bezeichnungen:
+            folgende Geräte mit der/den Bezeichnung/Bezeichnungen:
             {}
             haben ihr EOL erreicht.
             
