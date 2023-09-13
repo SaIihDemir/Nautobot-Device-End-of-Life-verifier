@@ -59,6 +59,8 @@ class VerifyEOL(Job) :
       emails = []
   
       for contact in contact_devices:
+          for device in contact[1]:
+              device_string += device.name + "\n"
           email = """
             Sehr geehrte/r {},
             folgende Geräte mit der/den Bezeichnung/Bezeichnungen:
@@ -69,7 +71,7 @@ class VerifyEOL(Job) :
             1. Ist das Gerät noch produktiv im Einsatz?
             2. Ist die Herstellergarantie noch aktuell?
             3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
-      """.format(contact[0], contact[1])
+      """.format(contact[0], device_string)
           emails.append(email)
        
       return'\n'.join(emails)
