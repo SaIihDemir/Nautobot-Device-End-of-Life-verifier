@@ -55,7 +55,9 @@ class VerifyEOL(Job) :
             for device in sorted_devices:
                writer.writerow([device.cf["contact"],device,device.cf["eol"]])
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
+       
       emails = []
+  
       for contact in contact_devices:
           email = """
             Sehr geehrte/r {},\n
