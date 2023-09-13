@@ -60,15 +60,15 @@ class VerifyEOL(Job) :
   
       for contact in contact_devices:
           email = """
-            Sehr geehrte/r {},\n
-            folgende Geräte mit den Bezeichnungen:\n
-            {}\n
-            \n
-            haben ihr EOL erreicht.\n
-            Bitte prüfen Sie folgende Informationen:\n
-            1. Ist das Gerät noch produktiv im Einsatz?\n
-            2. Ist die Herstellergarantie noch aktuell?\n
-            3. Sind alle Softwarekomponenten auf dem aktuellen Stand?\n
+            Sehr geehrte/r {},
+            folgende Geräte mit den Bezeichnungen:
+            {}
+            
+            haben ihr EOL erreicht.
+            Bitte prüfen Sie folgende Informationen:
+            1. Ist das Gerät noch produktiv im Einsatz?
+            2. Ist die Herstellergarantie noch aktuell?
+            3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
       """.format(contact[0], contact[1])
           emails.append(email)
        
