@@ -63,8 +63,8 @@ class VerifyEOL(Job) :
             Sehr geehrte/r {},
             folgende Geräte mit den Bezeichnungen:
             {}
-            
             haben ihr EOL erreicht.
+            
             Bitte prüfen Sie folgende Informationen:
             1. Ist das Gerät noch produktiv im Einsatz?
             2. Ist die Herstellergarantie noch aktuell?
