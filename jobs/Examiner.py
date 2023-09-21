@@ -17,16 +17,16 @@ class VerifyEOL(Job) :
 
      # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
-      unwanted_devices = ["Rackdevice", "Frame","Patchpanel"]
+      unwanted_devices = [""]
       for device in Device.objects.all():
          if device in unwanted_devices:
-             continue  
-            eol = device.cf["eol"]
-            try:
-               eol=datetime.strptime(eol, '%Y-%m-%d').date()
-               if eol < date.today():
-                  obsolete_devices.append(device) 
-            except Exception as e:
+            continue 
+         eol = device.cf["eol"]
+         try:
+            eol=datetime.strptime(eol, '%Y-%m-%d').date()
+            if eol < date.today():
+               obsolete_devices.append(device) 
+         except Exception as e:
                 self.log_failure(message = "Error parsing EOL date: {}".format(str(e)))
                 continue
              
