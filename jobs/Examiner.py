@@ -54,7 +54,7 @@ class VerifyEOL(Job) :
 # sort obsolete devices by contact and show log message if we have no obsolete devices 
 
       only_one_contact = []  
-      for device in obsolete_devices:
+      for device in contact_devices:
           if len(device) >2:
              for mail in (device[0:len(device)-1]):
                  only_one_contact.append([mail,device[-1]])
