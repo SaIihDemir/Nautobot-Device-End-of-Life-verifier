@@ -17,7 +17,7 @@ class VerifyEOL(Job) :
 
      # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
-      unwanted_devices = [""]
+      unwanted_devices = ["Frame","Rackdevice","Patchpanel"]
       for device in Device.objects.all():
          if device.device_role in unwanted_devices:
             continue 
