@@ -19,7 +19,7 @@ class VerifyEOL(Job) :
       obsolete_devices = []
       unwanted_devices = [""]
       for device in Device.objects.all():
-         if device in unwanted_devices:
+         if device.device_role in unwanted_devices:
             continue 
          eol = device.cf["eol"]
          try:
