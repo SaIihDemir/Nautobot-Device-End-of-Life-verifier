@@ -16,8 +16,9 @@ class VerifyEOL(Job) :
  def run (self, data, commit):
 
      # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
-      obsolete_devices = []
+      obsolete_devices = []  
       unwanted_devices = ["Frame","Rackdevice","Patchpanel"]
+      
       for device in Device.objects.all():
          if device.device_role.name in unwanted_devices:
             continue 
@@ -49,6 +50,18 @@ class VerifyEOL(Job) :
          else:
             contact_devices[j][1].append(device)
           
+#see if customfield "contact" has more than one e-mail in it.
+# sort obsolete devices by contact and show log message if we have no obsolete devices 
+
+      only_one_contact = []  
+      for device in obsolete_devices:
+          if len(device) >2:
+             for mail in (device[0:len(device)-1]):
+                 only_one_contact.append([mail,device[-1]])
+          else:
+              only_one_contact.append(device)
+
+          
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
@@ -60,7 +73,7 @@ class VerifyEOL(Job) :
        
       emails = []
   
-      for contact in contact_devices:
+      for contact in only_one_contact:
           device_string = ""
           for device in contact[1]:
               device_string += device.name + "\n"
@@ -74,7 +87,7 @@ Bitte prüfen Sie folgende Informationen:
 1. Ist das Gerät noch produktiv im Einsatz?
 2. Ist die Herstellergarantie noch aktuell?
 3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
-      """.format(contact[0], device_string)
+      """.format(only_one_contact[0], device_string)
           emails.append(email)
        
       return'\n'.join(emails)
