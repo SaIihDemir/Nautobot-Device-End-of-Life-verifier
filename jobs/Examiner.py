@@ -25,7 +25,7 @@ class VerifyEOL(Job) :
                if eol < date.today():
                   obsolete_devices.append(device) 
             except Exception as e:
-                self.log_failure(obj=device, message = "Error parsing EOL date: {}".format(str(e)))
+                self.log_failure(message = "Error parsing EOL date: {}".format(str(e)))
                 continue
              
 # sort obsolete devices by contact and show log message if we have no obsolete devices    
