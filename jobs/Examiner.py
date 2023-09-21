@@ -87,7 +87,7 @@ Bitte prüfen Sie folgende Informationen:
 1. Ist das Gerät noch produktiv im Einsatz?
 2. Ist die Herstellergarantie noch aktuell?
 3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
-      """.format(only_one_contact[0], device_string)
+      """.format(contact[0], device_string)
           emails.append(email)
        
       return'\n'.join(emails)
