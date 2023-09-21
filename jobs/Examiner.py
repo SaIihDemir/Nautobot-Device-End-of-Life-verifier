@@ -17,35 +17,25 @@ class VerifyEOL(Job) :
 
      # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
       obsolete_devices = []
-      unwanted_devices = [""]
+      unwanted_devices = ["Frame","Rackdevice","Patchpanel"]
       for device in Device.objects.all():
-         if device in unwanted_devices:
+         if device.device_role.name in unwanted_devices:
+            self.log_warning(obj=device.device_role, message = None)
             continue 
          eol = device.cf["eol"]
          try:
             eol=datetime.strptime(eol, '%Y-%m-%d').date()
-            if eol < date.today():   
+            if eol < date.today():
                obsolete_devices.append(device) 
          except Exception as e:
                 self.log_failure(message = "Error parsing EOL date: {}".format(str(e)))
                 continue
              
-# see if customfield "contact" has more than one e-mail in it.
-# sort obsolete devices by contact and show log message if we have no obsolete devices 
-         
-      one_contact_devices = []
-
-      for one_contact in obsolete_devices:
-         if len(one_contact) >2:
-            for one_mail in (one_contact[0:len(one_contact)-1]):
-               one_contact_devices.append([one_mail,one_contact[-1]])
-         else:
-            one_contact_devices.append(one_contact)
-         
-         if obsolete_devices:
-            sorted_devices = sorted(one_contact_devices, key=lambda x: x.cf["contact"])
-         else:
-            self.log_failure(obj=None, message = "no obsolete Device found")
+# sort obsolete devices by contact and show log message if we have no obsolete devices    
+      if obsolete_devices:
+         sorted_devices = sorted(obsolete_devices, key=lambda x: x.cf["contact"])
+      else:
+         self.log_failure(obj=None, message = "no obsolete Device found")
 
        
 #list for contacts with all their devices
