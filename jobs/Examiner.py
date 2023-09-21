@@ -19,7 +19,7 @@ class VerifyEOL(Job) :
       obsolete_devices = []
       unwanted_devices = ["Frame","Rackdevice","Patchpanel"]
       for device in Device.objects.all():
-         if device.device_role in unwanted_devices:
+         if device.device_role.name in unwanted_devices:
             self.log_warning(obj=device.device_role, message = None)
             continue 
          eol = device.cf["eol"]
