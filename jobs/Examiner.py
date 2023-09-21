@@ -46,7 +46,6 @@ class VerifyEOL(Job) :
          if device.cf["contact"] != sorted_devices[i].cf["contact"]:
             contact_devices.append([device.cf["contact"],[device]])
             j += 1
-            self.log_warning(obj=device.cf["contact"], message = None)
          else:
             contact_devices[j][1].append(device)
           
