@@ -58,9 +58,7 @@ class VerifyEOL(Job) :
                   only_one_contact.append([one_contact[0], [device]])
          else:
             only_one_contact.append(one_contact)
-
-# Sortieren Sie only_one_contact.
-only_one_contact = sorted(only_one_contact, key=itemgetter(0))
+      only_one_contact = sorted(only_one_contact, key=itemgetter(0))
 
 # Rest des Codes bleibt gleich.
   
