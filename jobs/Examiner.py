@@ -37,28 +37,33 @@ class VerifyEOL(Job) :
          self.log_failure(obj=None, message = "no obsolete Device found")
 
        
-#contact_Devices = list for contacts with all their devices 
-#only_one_contact = splits up devices with multiple contacts into seperate contacts with their devices
- 
+#list for contacts with all their devices
       only_one_contact = []
       contact_devices = []
       i = -2
       j = -1
+
       for device in sorted_devices:
-         i += 1
-         if device.cf["contact"] != sorted_devices[i].cf["contact"]:
-            contact_devices.append([device.cf["contact"],[device]])
-            j += 1
-         else:
-            contact_devices[j][1].append(device)
-          
-      for one_contact in contact_devices:
-          if len(one_contact) >2:
-              for c in (one_contact[0:len(one_contact)-1]):
-                  only_one_contact.append([c,one_contact[-1]])
+          i += 1
+          if device.cf["contact"] != sorted_devices[i].cf["contact"]:
+             contact_devices.append([device.cf["contact"], [device]])
+             j += 1
           else:
-              only_one_contact.append(one_contact)
-      only_one_contact = sorted(only_one_contact, key=itemgetter(0))   
+             contact_devices[j][1].append(device)
+
+   # Erstellen Sie separate Kontakte für Geräte mit mehreren Kontakten.
+      for one_contact in contact_devices:
+         if len(one_contact[1]) > 1:
+            for device in one_contact[1]:
+                  only_one_contact.append([one_contact[0], [device]])
+         else:
+            only_one_contact.append(one_contact)
+
+# Sortieren Sie only_one_contact.
+only_one_contact = sorted(only_one_contact, key=itemgetter(0))
+
+# Rest des Codes bleibt gleich.
+  
  
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
@@ -73,7 +78,7 @@ class VerifyEOL(Job) :
   
       for contact in only_one_contact:
           device_string = ""
-          for device in contact[-1]:
+          for device in contact[1]:
               device_string += device.name + "\n"
           email = """
 Sehr geehrte/r {},
