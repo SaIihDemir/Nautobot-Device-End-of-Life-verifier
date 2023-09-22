@@ -1,3 +1,9 @@
+from nautobot.dcim.models import Device
+from nautobot.extras.jobs import Job
+from datetime import datetime, date
+import csv
+from operator import attrgetter, itemgetter
+
 class VerifyEOL(Job) :
  class Meta:
          description = """
@@ -52,7 +58,7 @@ class VerifyEOL(Job) :
                   only_one_contact.append([c,one_contact[-1]])
           else:
               only_one_contact.append(one_contact)
-          only_one_contact = sorted(only_one_contact, key=itemgetter(0))   
+      only_one_contact = sorted(only_one_contact, key=itemgetter(0))   
  
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
@@ -83,3 +89,4 @@ Bitte prüfen Sie folgende Informationen:
           emails.append(email)
        
       return'\n'.join(emails)
+           
