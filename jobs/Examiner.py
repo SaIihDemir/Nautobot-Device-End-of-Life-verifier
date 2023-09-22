@@ -37,7 +37,10 @@ class VerifyEOL(Job) :
          self.log_failure(obj=None, message = "no obsolete Device found")
 
        
-#list for contacts with all their devices
+#contact_Devices = list for contacts with all their devices 
+#only_one_contact = splits up devices with multiple contacts into seperate contacts with their devices
+ 
+      only_one_contact = []
       contact_devices = []
       i = -2
       j = -1
