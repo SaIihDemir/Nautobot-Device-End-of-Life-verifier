@@ -73,7 +73,7 @@ class VerifyEOL(Job) :
   
       for contact in only_one_contact:
           device_string = ""
-          for device in contact[1]:
+          for device in contact[-1]:
               device_string += device.name + "\n"
           email = """
 Sehr geehrte/r {},
