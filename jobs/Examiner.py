@@ -2,7 +2,7 @@ from nautobot.dcim.models import Device
 from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import csv
-from operator import attrgetter
+from operator import attrgetter, itemgetter
 
 class VerifyEOL(Job) :
  class Meta:
@@ -48,7 +48,14 @@ class VerifyEOL(Job) :
             j += 1
          else:
             contact_devices[j][1].append(device)
-          
+         for one_contact in contact_devices:
+             if len(one_contact) >2:
+                 for c in (one_contact[0:len(one_contact)-1]):
+                     only_one_contact.append([c,one_contact[-1]])
+             else:
+                 only_one_contact.append(one_contact)
+                 only_one_contact = sorted(only_one_contact, key=itemgetter(0))   
+ 
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
@@ -60,7 +67,7 @@ class VerifyEOL(Job) :
        
       emails = []
   
-      for contact in contact_devices:
+      for contact in only_one_contact:
           device_string = ""
           for device in contact[1]:
               device_string += device.name + "\n"
