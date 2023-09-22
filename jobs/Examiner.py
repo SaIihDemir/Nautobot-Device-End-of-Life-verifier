@@ -54,7 +54,7 @@ class VerifyEOL(Job) :
           
       for one_contact in contact_devices:
           if len(one_contact) > 2:
-              self.log_success(obj=contact, message = "Kontakt")
+              self.log_success(obj=one_contact, message = "Kontakt")
               for c in (one_contact[0:len(one_contact)-1]):
                   only_one_contact.append([c,one_contact[-1]])
                   self.log_failure(obj=c, message = "C")
