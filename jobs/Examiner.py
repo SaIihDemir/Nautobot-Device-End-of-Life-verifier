@@ -57,7 +57,7 @@ class VerifyEOL(Job) :
 #split multiple mail adresses string seperate strings with devices
       split_contacts = []                  
       for contact_with_device in contact_devices:
-          seperated_mail = re.split(r"[,]\s*", contact_with_device[0])
+          seperated_mail = re.split(r"[,]\s*", contact_with_device.cf["contact"])
           split_contacts.append([seperated_mail,contact_with_device[-1]])
             
       one_mail_with_devices = []      
@@ -72,8 +72,8 @@ class VerifyEOL(Job) :
       j = -1
       for device in one_mail_with_devices:
           i += 1
-          if device[0] != one_mail_with_devices[i].cf["contact"]:
-              contact_devices.append([device.cf["contact"],[device]])
+          if device[0] != one_mail_with_devices:
+              contact_devices.append([device[0],device[1]])
               j += 1
           else:
               contact_devices[j][1].append(device)
