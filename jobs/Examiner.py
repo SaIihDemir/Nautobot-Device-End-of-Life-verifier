@@ -3,6 +3,8 @@ from nautobot.extras.jobs import Job
 from datetime import datetime, date
 import csv
 from operator import attrgetter, itemgetter
+import re
+
 
 class VerifyEOL(Job) :
  class Meta:
@@ -52,18 +54,31 @@ class VerifyEOL(Job) :
          else:
             contact_devices[j][1].append(device)
 
-      only_one_contact = []
-      for one_contact in contact_devices:
-          self.log_success(obj=one_contact, message = "Kontakt")
-          if len(one_contact) > 2:
-              self.log_success(obj=one_contact, message = "Kontakt")
-              for c in (one_contact[0:len(one_contact)-1]):
-                  only_one_contact.append([c,one_contact[-1]])
-                  self.log_failure(obj=c, message = "C")
+#split multiple mail adresses string seperate strings with devices
+      split_contacts = []                  
+      for contact_with_device in contact_devices:
+          seperated_mail = re.split(r"[,]\s*", contact_with_device[0])
+          split_contacts.append([seperated_mail,contact_with_device[-1]])
+            
+      one_mail_with_devices = []      
+      for devices in split_contacts:
+          if len(devices[0]) > 0:
+              for mail in (devices[0]):
+                  one_mail_with_devices.append([mail,devices[-1]])
+      one_mail_with_devices = sorted(one_mail_with_devices, key = itemgetter(0))
+
+      contact_devices = []
+      i = -2
+      j = -1
+      for device in one_mail_with_devices:
+          i += 1
+          if device.cf["contact"] != one_mail_with_devices[i].cf["contact"]:
+              contact_devices.append([device.cf["contact"],[device]])
+              j += 1
           else:
-              only_one_contact.append(one_contact)
-      only_one_contact = sorted(only_one_contact, key=itemgetter(0))   
- 
+              contact_devices[j][1].append(device)
+
+""" 
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
