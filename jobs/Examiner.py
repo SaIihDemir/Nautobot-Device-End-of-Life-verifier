@@ -78,7 +78,7 @@ class VerifyEOL(Job) :
           else:
               contact_devices[j][1].append(device)
 
-""" 
+
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
