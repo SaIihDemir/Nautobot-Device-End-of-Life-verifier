@@ -90,7 +90,7 @@ class VerifyEOL(Job) :
        
       emails = []
   
-      for contact in only_one_contact:
+      for contact in contact_devices:
           device_string = ""
           for device in contact[-1]:
               device_string += device.name + "\n"
