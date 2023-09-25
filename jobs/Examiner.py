@@ -66,8 +66,7 @@ class VerifyEOL(Job) :
               for mail in (devices[0]):
                   one_mail_with_devices.append([mail,devices[-1]])
       one_mail_with_devices = sorted(one_mail_with_devices, key = itemgetter(0))
-      self.log_failure(obj=devices, message = "split contacts")
-
+  
       contact_devices = []
       i = -2
       for contact in one_mail_with_devices:
