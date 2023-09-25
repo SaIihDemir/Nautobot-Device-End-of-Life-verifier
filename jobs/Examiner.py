@@ -78,6 +78,7 @@ class VerifyEOL(Job) :
           else:
               current_email = entry[0]
               contact_devices.append([current_email, entry[1]])
+      self.log_success(obj=entry, message = "siehe liste")     
 
 
 # Create csv file for obsolete devices
