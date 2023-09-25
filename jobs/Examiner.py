@@ -77,6 +77,8 @@ class VerifyEOL(Job) :
               j += 1
           else:
               contact_devices[j][1].append(device)
+      for contact in contact_devices:
+          self.log_success(obj=contact, message = "test")
 
 
 # Create csv file for obsolete devices
