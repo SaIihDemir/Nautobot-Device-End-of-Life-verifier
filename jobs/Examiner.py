@@ -70,6 +70,7 @@ class VerifyEOL(Job) :
       contact_devices = []
       i = -2
       for contact in one_mail_with_devices:
+          self.log_failure(obj=contact, message = "test")
           i += 1
           mail = contact[0]
           device = contact[1]
