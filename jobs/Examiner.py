@@ -69,18 +69,15 @@ class VerifyEOL(Job) :
       self.log_failure(obj=devices, message = "split contacts")
 
       contact_devices = []
-      current_email = None
-      for entry in one_mail_with_devices:
-          self.log_success(obj=entry, message = "siehe liste")
-          if current_email is None:
-              current_email = entry[0]
-              contact_devices.append([current_email, entry[1]])
-          elif entry[0] == current_email:
-              contact_devices[-1][1].extend(entry[1])
-          else:
-              current_email = entry[0]
-              contact_devices.append([current_email, entry[1]])     
-
+      i = -2
+      for contact in one_mail_with_devices:
+          i += 1
+          mail = contact[0]
+          device = contact[1]
+          if mail == one_mail_with_devices[i][0]:
+              contact_devices[-1][1].extend(device)
+          elif mail != one_mail_with_devices[i][1]:
+              contact_devices.append([mail, device])
 
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
