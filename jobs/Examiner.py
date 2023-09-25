@@ -72,7 +72,7 @@ class VerifyEOL(Job) :
       j = -1
       for device in one_mail_with_devices:
           i += 1
-          if device.cf["contact"] != one_mail_with_devices[i].cf["contact"]:
+          if device[0] != one_mail_with_devices[i].cf["contact"]:
               contact_devices.append([device.cf["contact"],[device]])
               j += 1
           else:
