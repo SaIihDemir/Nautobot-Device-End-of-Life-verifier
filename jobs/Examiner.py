@@ -68,15 +68,16 @@ class VerifyEOL(Job) :
       one_mail_with_devices = sorted(one_mail_with_devices, key = itemgetter(0))
 
       contact_devices = []
-      i = -2
-      j = -1
-      for device in one_mail_with_devices:
-          i += 1
-          if device[0] != one_mail_with_devices:
-              contact_devices.append([device[0],device[1]])
-              j += 1
+      current_email = None
+      for entry in one_mail_with_devices:
+          if current_email is None:
+              current_email = entry[0]
+              contact_devices.append([current_email, entry[1]])
+          elif entry[0] == current_email:
+              contact_devices[-1][1].extend(entry[1])
           else:
-              contact_devices[j][1].append(device)
+              current_email = entry[0]
+              contact_devices.append([current_email, entry[1]])
 
 
 # Create csv file for obsolete devices
