@@ -40,7 +40,7 @@ class VerifyEOL(Job) :
 #contact_Devices = list for contacts with all their devices 
 #only_one_contact = splits up devices with multiple contacts into seperate contacts with their devices
  
-      only_one_contact = []
+     
       contact_devices = []
       i = -2
       j = -1
@@ -51,7 +51,8 @@ class VerifyEOL(Job) :
             j += 1
          else:
             contact_devices[j][1].append(device)
-          
+
+      only_one_contact = []
       for one_contact in contact_devices:
           self.log_success(obj=one_contact, message = "Kontakt")
           if len(one_contact) > 2:
