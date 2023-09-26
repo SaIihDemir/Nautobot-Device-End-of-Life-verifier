@@ -76,7 +76,7 @@ class VerifyEOL(Job) :
           device = contact[1]
           email = mail.strip()
           previous_mail = one_mail_with_devices[i][0].strip()
-          if mail == previous_mail
+          if mail == previous_mail:
               contact_devices[-1][1].extend(device)
           else mail != previous_mail:
               contact_devices.append([email, device])
