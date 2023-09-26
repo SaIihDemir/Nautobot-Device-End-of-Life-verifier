@@ -97,7 +97,7 @@ class VerifyEOL(Job) :
                for device in devices:
                 device_string += device.name
                 device_eol += device.cf["eol"]
-                   writer.writerow([contact,device_string,device.cf["eol"]])
+                writer.writerow([contact,device_string,device.cf["eol"]])
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
        
       emails = []
