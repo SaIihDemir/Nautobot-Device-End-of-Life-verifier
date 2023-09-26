@@ -75,7 +75,7 @@ class VerifyEOL(Job) :
           mail = contact[0]
           device = contact[1]
           if mail == one_mail_with_devices[i][0]:
-              contact_devices[i][1].extend(device)
+              contact_devices[-1][1].extend(device)
           elif mail != one_mail_with_devices[i][1]:
               contact_devices.append([mail, device])
 
