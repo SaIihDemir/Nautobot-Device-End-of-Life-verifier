@@ -53,8 +53,6 @@ class VerifyEOL(Job) :
             j += 1
          else:
             contact_devices[j][1].append(device)
-      for contacts in contact_devices:
-          contact = contacts[0].replace(" ","") 
 
 #split multiple mail adresses string seperate strings with devices
       split_contacts = []                  
