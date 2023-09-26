@@ -62,8 +62,9 @@ class VerifyEOL(Job) :
             
       one_mail_with_devices = []      
       for devices in split_contacts:
-          for mail in (devices[0]):
-              one_mail_with_devices.append([mail,devices[-1]])
+          if len(devices[0]) > 0:
+              for mail in (devices[0]):
+                  one_mail_with_devices.append([mail,devices[-1]])
       one_mail_with_devices = sorted(one_mail_with_devices, key = itemgetter(0))
   
       contact_devices = []
