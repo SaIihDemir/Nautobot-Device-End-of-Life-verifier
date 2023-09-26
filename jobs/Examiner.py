@@ -84,10 +84,6 @@ class VerifyEOL(Job) :
           elif email != previous_mail:  
               contact_devices.append([email,devices])
 
-          for contact in contact_devices:
-              if contact[0] == "" or " ":
-                  contact_devices.remove(contact)
-
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
