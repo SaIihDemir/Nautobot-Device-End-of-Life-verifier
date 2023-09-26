@@ -78,7 +78,7 @@ class VerifyEOL(Job) :
           previous_mail = one_mail_with_devices[i][0].strip()
           if mail == previous_mail:
               contact_devices[-1][1].extend(device)
-          else mail != previous_mail:
+          elif mail != previous_mail:
               contact_devices.append([email, device])
 
 # Create csv file for obsolete devices
