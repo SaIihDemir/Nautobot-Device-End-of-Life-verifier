@@ -70,15 +70,14 @@ class VerifyEOL(Job) :
       contact_devices = []
       i = -2
       for contact in one_mail_with_devices:
-          self.log_failure(obj=contact, message = "test")
           i += 1
           mail = contact[0]
           device = contact[1]
           email = mail.replace(" ", "")
           previous_mail = one_mail_with_devices[i][0].replace(" ", "")
-          if mail == previous_mail:
+          if email == previous_mail:
               contact_devices[-1][1].extend(device)
-          elif mail != previous_mail:
+          elif email != previous_mail:
               contact_devices.append([email,device])
 
 # Create csv file for obsolete devices
