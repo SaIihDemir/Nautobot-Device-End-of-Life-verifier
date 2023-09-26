@@ -95,8 +95,8 @@ class VerifyEOL(Job) :
                device_string = ""
                device_eol = ""
                for device in devices:
-                   device_string += device.name + "\n"
-                   device_eol += device.cf["eol"] + "\n"
+                   device_string += device.name 
+                   device_eol += device.cf["eol"]
                writer.writerow([contact,device_string,device_eol])
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
        
