@@ -59,7 +59,7 @@ class VerifyEOL(Job) :
             writer = csv.writer(file)
             field = ['Device', 'Contact', 'EOL']
             writer.writerow(field)
-            for devices in contacts_with_typo:
+            for devices in contacts_with_typos:
                contact = devices.cf["contact"]
                device = devices.name
                eol = devices.cf["eol"]
