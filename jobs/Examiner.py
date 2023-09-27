@@ -63,7 +63,7 @@ class VerifyEOL(Job) :
                contact = devices.cf["contact"]
                device = devices.name
                eol = devices.cf["eol"]
-               writer.writerow([contact,device,device_eol])
+               writer.writerow([contact,device,eol])
             self.log_success(obj = None, message = "created csv file for device contacts with typos") 
  
 #contact_Devices = list for contacts with all their devices 
