@@ -40,7 +40,7 @@ class VerifyEOL(Job) :
        
 #exclude contact-information that has typos into seperate list
       contacts_with_typos = []
-      valid_Contacts = []
+      valid_contacts = []
       for device in sorted_devices:
           pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
           if re.fullmatch(pattern, device.cf["contact"]):
