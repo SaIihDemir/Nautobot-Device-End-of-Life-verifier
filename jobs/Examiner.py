@@ -54,8 +54,7 @@ class VerifyEOL(Job) :
       valid_contacts = sorted(valid_contacts, key = itemgetter(0))
 
   # Create csv file for contacts_with_typos
-      with open('contacts_with_typos_{}.csv', 'w', newline='') as file:
-            .format(date.today())
+      with open('contacts_with_typos.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Device', 'Contact', 'EOL']
             writer.writerow(field)
@@ -113,8 +112,7 @@ class VerifyEOL(Job) :
               contact_devices.append([email,devices])
 
 # Create csv file for obsolete devices
-      with open('obsolete_devices_{}.csv', 'w', newline='') as file:
-            .format(date.today())
+      with open('obsolete_devices.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']
             writer.writerow(field)
