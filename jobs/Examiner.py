@@ -52,8 +52,7 @@ class VerifyEOL(Job) :
                       valid_contacts.append(device)
                   else:
                       contacts_with_typos.append(device)
-                   
-      valid_contacts = sorted(valid_contacts, key = attrgetter(str(cf.["contact"]))
+      valid_contacts = sorted(valid_contacts, key=lambda x: x.cf["contact"])
 
   # Create csv file for contacts_with_typos
       with open('contacts_with_typos.csv', 'w', newline='') as file:
