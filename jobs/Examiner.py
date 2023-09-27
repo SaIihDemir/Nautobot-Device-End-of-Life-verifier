@@ -37,8 +37,36 @@ class VerifyEOL(Job) :
          sorted_devices = sorted(obsolete_devices, key=lambda x: x.cf["contact"])
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
-
        
+#exclude contact-information that has typos into seperate list
+      contacts_with_typos = []
+      valid_Contacts = []
+      for device in sorted_devices:
+          pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
+          if re.fullmatch(pattern, device.cf["contact"]):
+               valid_contacts.append(device)
+          else:
+              multiple_contacts = re.split(r"[\s]\s*", device.cf["contact"])
+              if re.fullmatch(pattern, multiple_contacts):
+                  valid_contacts.append(device)
+              else:
+                  contacts_with_typos.append(device)
+      valid_contacts = sorted(valid_contacts, key = itemgetter(0))
+
+  # Create csv file for contacts_with_typos
+      with open('contacts_with_typos_{}.csv', 'w', newline='') as file:
+            .format(date.today())
+            writer = csv.writer(file)
+            field = ['Device', 'Contact', 'EOL']
+            writer.writerow(field)
+            for devices in contacts_with_typo:
+               contact = devices.cf["contact"]
+               device = devices.name
+               eol = devices.cf["eol"]
+               for device in devices:
+               writer.writerow([contact,device,device_eol])
+            self.log_success(obj = None, message = "created csv file for device contacts with typos") 
+ 
 #contact_Devices = list for contacts with all their devices 
 #only_one_contact = splits up devices with multiple contacts into seperate contacts with their devices
  
@@ -46,9 +74,9 @@ class VerifyEOL(Job) :
       contact_devices = []
       i = -2
       j = -1
-      for device in sorted_devices:
+      for device in valid_contacts:
          i += 1
-         if device.cf["contact"] != sorted_devices[i].cf["contact"]:
+         if device.cf["contact"] != valid_contacts[i].cf["contact"]:
             contact_devices.append([device.cf["contact"],[device]])
             j += 1
          else:
@@ -85,7 +113,8 @@ class VerifyEOL(Job) :
               contact_devices.append([email,devices])
 
 # Create csv file for obsolete devices
-      with open('obsolete_devices.csv', 'w', newline='') as file:
+      with open('obsolete_devices_{}.csv', 'w', newline='') as file:
+            .format(date.today())
             writer = csv.writer(file)
             field = ['Contact', 'Device', 'EOL']
             writer.writerow(field)
