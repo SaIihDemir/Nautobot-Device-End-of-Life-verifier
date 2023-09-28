@@ -110,7 +110,7 @@ class VerifyEOL(Job) :
                       continue
                   else:
                       contact_devices[-1][1].append(device)
-          elif email != previous_mail:  
+          elif email != previous_mail or email == previous_mail_without_commas:  
               contact_devices.append([email,devices])
 
 # Create csv file for obsolete devices
