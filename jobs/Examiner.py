@@ -151,17 +151,17 @@ Bitte prüfen Sie folgende Informationen:
       """.format(contact[0], device_string)
           emails.append(email)
           self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
-"""       
-          for contact in contact_devices:     
-                smtp = smtplib.SMTP(HOST, PORT)
-                status_code, response = smtp.ehlo()
-                #self.log_info(f"[*] Echoing the server: {status_code} {response}")
-                status_code, response = smtp.starttls()
-                #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
-                status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
-                #self.log_info(f"[*] Logging in: {status_code} {response}")
-                smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
-                smtp.quit()""" 
+       
+          #for contact in contact_devices:     
+          #      smtp = smtplib.SMTP(HOST, PORT)
+          #      status_code, response = smtp.ehlo()
+          #      #self.log_info(f"[*] Echoing the server: {status_code} {response}")
+          #      status_code, response = smtp.starttls()
+          #      #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
+          #      status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
+          #      #self.log_info(f"[*] Logging in: {status_code} {response}")
+          #      smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
+          #      smtp.quit()""" 
                 
       return'\n'.join(emails)
            
