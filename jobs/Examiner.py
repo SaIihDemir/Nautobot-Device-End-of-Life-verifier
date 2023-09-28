@@ -165,6 +165,7 @@ Bitte prüfen Sie folgende Informationen:
               smtp.quit()
        except Exception as e:
                 self.log_failure(message = "Error sending email: {}".format(str(e)))
+                continue
         
       return'\n'.join(emails)
            
