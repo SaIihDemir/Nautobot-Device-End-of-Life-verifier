@@ -17,7 +17,7 @@ class VerifyEOL(Job) :
         
  def run (self, data, commit):
 
-     # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whos EOL is exceeded
+     # create a list for obsolete devices and add devices, including their contact, name and End-of-Life(EOL), whose EOL is exceeded
       obsolete_devices = []
       unwanted_devices = ["Frame","Rackdevice","Patchpanel"]
       for device in Device.objects.all():
@@ -46,11 +46,13 @@ class VerifyEOL(Job) :
       for device in sorted_devices:
           if re.fullmatch(one_mail_pattern, device.cf["contact"]):
               valid_contacts.append(device)
-          else:
+          elif:
               multiple_contacts = device.cf["contact"].replace(",","")
               if re.fullmatch(one_mail_pattern, multiple_contacts) or re.fullmatch(multiple_mail_pattern, multiple_contacts):
                   valid_contacts.append(device)
-              elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
+          elif:
+              multiple_contacts =  device.cf["contact"].replace(","," ")
+              if re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
                   valid_contacts.append(device) 
               else:
                   contacts_with_typos.append(device)
