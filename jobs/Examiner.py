@@ -129,10 +129,10 @@ class VerifyEOL(Job) :
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
        
       emails = []
-      HOST = "smtp-mail.outlook.com"
-      PORT = 587
-      FROM_EMAIL =  'pytest12355555@outlook.com' 
-      PASSWORD = 'Pytest1234'
+    #  HOST = "smtp-mail.outlook.com"
+    #  PORT = 587
+    #  FROM_EMAIL =  'pytest12355555@outlook.com' 
+    #  PASSWORD = 'Pytest1234'
       for contact in contact_devices:
           device_string = ""
           for device in contact[-1]:
@@ -152,20 +152,20 @@ Bitte prüfen Sie folgende Informationen:
       """.format(contact[0], device_string)
           emails.append(email)
       self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
-       try: 
-          for contact in contact_devices:     
-              smtp = smtplib.SMTP(HOST, PORT)
-              status_code, response = smtp.ehlo()
+      # try: 
+        #  for contact in contact_devices:     
+        #      smtp = smtplib.SMTP(HOST, PORT)
+        #      status_code, response = smtp.ehlo()
               #self.log_info(f"[*] Echoing the server: {status_code} {response}")
-              status_code, response = smtp.starttls()
+        #      status_code, response = smtp.starttls()
               #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
-              status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
+        #      status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
               #self.log_info(f"[*] Logging in: {status_code} {response}")
-              smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
-              smtp.quit()
-       except Exception as e:
-                self.log_failure(message = "Error sending email: {}".format(str(e)))
-                continue
+        #      smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
+        #      smtp.quit()
+    #   except Exception as e:
+       #         self.log_failure(message = "Error sending email: {}".format(str(e)))
+       #         continue
         
       return'\n'.join(emails)
            
