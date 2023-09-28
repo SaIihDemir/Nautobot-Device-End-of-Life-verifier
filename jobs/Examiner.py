@@ -104,7 +104,7 @@ class VerifyEOL(Job) :
           email = mail.replace(" ", "")
           previous_mail = one_mail_with_devices[i][0].replace(" ", "")
           previous_mail_without_commas = previous_mail.replace(",","")
-          if email == previous_mail or email == previous_mail_without_commas
+          if email == previous_mail or email == previous_mail_without_commas:
               for device in devices:
                   if device in contact_devices[-1][1]:
                       continue
@@ -151,7 +151,7 @@ Bitte prüfen Sie folgende Informationen:
       """.format(contact[0], device_string)
           emails.append(email)
           self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
-       
+"""       
           for contact in contact_devices:     
                 smtp = smtplib.SMTP(HOST, PORT)
                 status_code, response = smtp.ehlo()
@@ -162,6 +162,6 @@ Bitte prüfen Sie folgende Informationen:
                 #self.log_info(f"[*] Logging in: {status_code} {response}")
                 smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
                 smtp.quit()
-           
+"""           
       return'\n'.join(emails)
            
