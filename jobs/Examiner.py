@@ -129,10 +129,10 @@ class VerifyEOL(Job) :
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
        
       emails = []
-      #HOST = "smtp-mail.outlook.com"
-      #PORT = 587
-      #FROM_EMAIL =  'pytest5@outlook.com' 
-      #PASSWORD = 'Pytest1234'
+      HOST = "smtp-mail.outlook.com"
+      PORT = 587
+      FROM_EMAIL =  'pytest123455@outlook.de' 
+      PASSWORD = 'Pytest1234'
       for contact in contact_devices:
           device_string = ""
           for device in contact[-1]:
@@ -151,16 +151,16 @@ Bitte prüfen Sie folgende Informationen:
           emails.append(email)
       self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
        
-          #for contact in contact_devices:     
-          #      smtp = smtplib.SMTP(HOST, PORT)
-          #      status_code, response = smtp.ehlo()
-          #      #self.log_info(f"[*] Echoing the server: {status_code} {response}")
-          #      status_code, response = smtp.starttls()
-          #      #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
-          #      status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
-          #      #self.log_info(f"[*] Logging in: {status_code} {response}")
-          #      smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
-          #      smtp.quit()""" 
+          for contact in contact_devices:     
+                smtp = smtplib.SMTP(HOST, PORT)
+                status_code, response = smtp.ehlo()
+                #self.log_info(f"[*] Echoing the server: {status_code} {response}")
+                status_code, response = smtp.starttls()
+                #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
+                status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
+                #self.log_info(f"[*] Logging in: {status_code} {response}")
+                smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
+                smtp.quit()""" 
                 
       return'\n'.join(emails)
            
