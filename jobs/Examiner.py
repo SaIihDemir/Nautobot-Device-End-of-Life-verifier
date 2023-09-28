@@ -99,11 +99,12 @@ class VerifyEOL(Job) :
       i = -2
       for contact in one_mail_with_devices:
           i += 1
-          mail = contact[0]
+          mail = contact[0].replace(",","")
           devices = contact[1]
           email = mail.replace(" ", "")
           previous_mail = one_mail_with_devices[i][0].replace(" ", "")
-          if email == previous_mail:
+          previous_mail_without_commas = previous_mail.replace(",","")
+          if email == previous_mail or email == previous_mail_without_commas
               for device in devices:
                   if device in contact_devices[-1][1]:
                       continue
@@ -129,7 +130,10 @@ class VerifyEOL(Job) :
             self.log_success(obj = None, message = "created csv file for obsolete devices")   
        
       emails = []
-  
+      #HOST = "smtp-mail.outlook.com"
+      #PORT = 587
+      #FROM_EMAIL =  'pytest5@outlook.com' 
+      #PASSWORD = 'Pytest1234'
       for contact in contact_devices:
           device_string = ""
           for device in contact[-1]:
@@ -146,6 +150,18 @@ Bitte prüfen Sie folgende Informationen:
 3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
       """.format(contact[0], device_string)
           emails.append(email)
+          self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
        
+          for contact in contact_devices:     
+                smtp = smtplib.SMTP(HOST, PORT)
+                status_code, response = smtp.ehlo()
+                #self.log_info(f"[*] Echoing the server: {status_code} {response}")
+                status_code, response = smtp.starttls()
+                #self.log_info(f"[*] Starting TLS connection: {status_code} {response}")
+                status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
+                #self.log_info(f"[*] Logging in: {status_code} {response}")
+                smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
+                smtp.quit()
+           
       return'\n'.join(emails)
            
