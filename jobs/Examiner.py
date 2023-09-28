@@ -47,11 +47,11 @@ class VerifyEOL(Job) :
                valid_contacts.append(device)
           else:
               multiple_contacts = device.cf["contact"]
-              contact_typos = multiple_contacts.replace(",","")
-              contact_typos = re.split(r"[\s]\s*", device.cf["contact"])
-              for contact in contact_typos:
+              contacts = multiple_contacts.replace(",","")
+              contacts = re.split(r"[\s]\s*", device.cf["contact"])
+              for contact in contacts:
                   if re.fullmatch(pattern, contact):
-                      valid_contacts.append(device)
+                      valid_contacts.append(contact)
                   else:
                       contacts_with_typos.append(device)
       valid_contacts = sorted(valid_contacts, key=lambda x: x.cf["contact"])
