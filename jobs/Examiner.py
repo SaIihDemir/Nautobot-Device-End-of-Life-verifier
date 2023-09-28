@@ -131,7 +131,7 @@ class VerifyEOL(Job) :
       emails = []
       HOST = "smtp-mail.outlook.com"
       PORT = 587
-      FROM_EMAIL =  'pytest1234555@outlook.de' 
+      FROM_EMAIL =  'pytest1234555@outlook.com' 
       PASSWORD = 'Pytest1234'
       for contact in contact_devices:
           device_string = ""
