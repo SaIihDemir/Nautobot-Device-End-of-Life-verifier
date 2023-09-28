@@ -163,5 +163,5 @@ Bitte prüfen Sie folgende Informationen:
                 smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
                 smtp.quit()""" 
                 
-          return'\n'.join(emails)
+      return'\n'.join(emails)
            
