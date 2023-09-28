@@ -150,7 +150,7 @@ Bitte prüfen Sie folgende Informationen:
 3. Sind alle Softwarekomponenten auf dem aktuellen Stand?
       """.format(contact[0], device_string)
           emails.append(email)
-          self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
+      self.log_info(obj=None, message = "Emails der Liste hinzugefügt" )
        
           #for contact in contact_devices:     
           #      smtp = smtplib.SMTP(HOST, PORT)
