@@ -41,20 +41,19 @@ class VerifyEOL(Job) :
 #exclude contacts with typos into seperate list
       contacts_with_typos = []
       valid_contacts = []
+      one_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
+      multiple_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
       for device in sorted_devices:
-          one_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
-          multiple_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
           if re.fullmatch(one_mail_pattern, device.cf["contact"]):
               valid_contacts.append(device)
           else:
               multiple_contacts = device.cf["contact"].replace(",","")
-              for contact in multiple_contacts:
-                  if re.fullmatch(one_mail_pattern, contact) or re.fullmatch(multiple_mail_pattern, contact):
-                      valid_contacts.append(device)
-                  elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
-                      valid_contacts.append(device) 
-                  else:
-                      contacts_with_typos.append(device)
+              if re.fullmatch(one_mail_pattern, contact) or re.fullmatch(multiple_mail_pattern, contact):
+                  valid_contacts.append(device)
+              elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
+                  valid_contacts.append(device) 
+              else:
+                  contacts_with_typos.append(device)
       valid_contacts = sorted(valid_contacts, key=lambda x: x.cf["contact"])
 
   # Create csv file for contacts_with_typos
