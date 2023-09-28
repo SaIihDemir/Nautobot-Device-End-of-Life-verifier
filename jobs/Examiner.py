@@ -4,7 +4,7 @@ from datetime import datetime, date
 import csv
 from operator import attrgetter, itemgetter
 import re
-
+import smtplib
 
 class VerifyEOL(Job) :
  class Meta:
