@@ -92,6 +92,7 @@ class VerifyEOL(Job) :
       one_mail_with_devices = []      
       for devices in split_contacts:
           for mail in (devices[0]):
+              mail = mail.replace(",","")
               one_mail_with_devices.append([mail,devices[-1]])
       one_mail_with_devices = sorted(one_mail_with_devices, key = itemgetter(0))
   
@@ -99,19 +100,17 @@ class VerifyEOL(Job) :
       i = -2
       for contact in one_mail_with_devices:
           i += 1
-          mail = contact[0].replace(",","")
+          mail = contact[0].replace(" ","")
           devices = contact[1]
-          email = mail.replace(" ", "")
           previous_mail = one_mail_with_devices[i][0].replace(" ", "")
-          previous_mail_without_commas = previous_mail.replace(",","")
-          if email == previous_mail or email == previous_mail_without_commas:
+          if mail == previous_mail:
               for device in devices:
                   if device in contact_devices[-1][1]:
                       continue
                   else:
                       contact_devices[-1][1].append(device)
-          elif email != previous_mail or email == previous_mail_without_commas:  
-              contact_devices.append([email,devices])
+          else:  
+              contact_devices.append([mail,devices])
 
 # Create csv file for obsolete devices
       with open('obsolete_devices.csv', 'w', newline='') as file:
