@@ -88,6 +88,7 @@ class VerifyEOL(Job) :
       for contact_with_device in contact_devices:
            
           seperated_mail = re.split(r"[\s]\s*", contact_with_device[0])
+          self.log_info(obj = seperated_mail)
           mail = seperated_mail.replace(",","")
           split_contacts.append([mail,contact_with_device[-1]])
             
