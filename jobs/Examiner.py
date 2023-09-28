@@ -51,6 +51,8 @@ class VerifyEOL(Job) :
               for contact in multiple_contacts:
                   if re.fullmatch(one_mail_pattern, contact) or re.fullmatch(multiple_mail_pattern, contact):
                       valid_contacts.append(device)
+                  elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
+                      valid_contacts.append(device) 
                   else:
                       contacts_with_typos.append(device)
       valid_contacts = sorted(valid_contacts, key=lambda x: x.cf["contact"])
