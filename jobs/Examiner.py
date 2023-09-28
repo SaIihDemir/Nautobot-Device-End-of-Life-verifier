@@ -137,7 +137,7 @@ class VerifyEOL(Job) :
           device_string = ""
           for device in contact[-1]:
               device_string += device.name + "\n"
-          email = """
+          email = """ Subject: End-of-Life ihrer Geräte 
 Sehr geehrte/r {},
 folgende Geräte mit der/den Bezeichnung/Bezeichnungen:
 {}
