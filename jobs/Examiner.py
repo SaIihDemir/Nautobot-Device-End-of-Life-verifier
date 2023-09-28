@@ -161,7 +161,7 @@ Bitte prüfen Sie folgende Informationen:
                 status_code, response = smtp.login(FROM_EMAIL, PASSWORD)
                 #self.log_info(f"[*] Logging in: {status_code} {response}")
                 smtp.sendmail(FROM_EMAIL, contact[0], email.encode('cp1252'))
-                smtp.quit()
-"""           
+                smtp.quit()""" 
+                
       return'\n'.join(emails)
            
