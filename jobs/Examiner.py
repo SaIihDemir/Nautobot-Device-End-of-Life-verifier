@@ -46,8 +46,6 @@ class VerifyEOL(Job) :
           multiple_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
           if re.fullmatch(one_mail_pattern, device.cf["contact"]):
               valid_contacts.append(device)
-          elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
-              valid_contacts.append(device)
           else:
               multiple_contacts = device.cf["contact"].replace(",","")
               for contact in multiple_contacts:
