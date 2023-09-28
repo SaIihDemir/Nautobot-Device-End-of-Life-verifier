@@ -51,7 +51,7 @@ class VerifyEOL(Job) :
               contacts = re.split(r"[\s]\s*", device.cf["contact"])
               for contact in contacts:
                   if re.fullmatch(pattern, contact):
-                      valid_contacts.append(device)
+                      valid_contacts.append(contact)
                   else:
                       contacts_with_typos.append(device)
       valid_contacts = sorted(valid_contacts, key=lambda x: x.cf["contact"])
@@ -87,12 +87,7 @@ class VerifyEOL(Job) :
       split_contacts = []                  
       for contact_with_device in contact_devices:
           seperated_mail = re.split(r"[\s]\s*", contact_with_device[0])
-          if isinstance(seperated_mail, list):
-              for contact in seperated_mail:
-                  mail = contact[0].replace(",","")
-                  split_contacts.append([mail,contact_with_device[-1]])
-          else:
-             split_contacts.append([seperated_mail,contact_with_device[-1]])
+          split_contacts.append([seperated_mail,contact_with_device[-1]])
             
       one_mail_with_devices = []      
       for devices in split_contacts:
