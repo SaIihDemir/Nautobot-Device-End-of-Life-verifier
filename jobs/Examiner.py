@@ -43,7 +43,7 @@ class VerifyEOL(Job) :
       valid_contacts = []
       for device in sorted_devices:
           one_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
-          multiple_mail_pattern = pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
+          multiple_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
           if re.fullmatch(one_mail_pattern, device.cf["contact"]):
               valid_contacts.append(device)
           elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
