@@ -48,7 +48,7 @@ class VerifyEOL(Job) :
               valid_contacts.append(device)
           else:
               multiple_contacts = device.cf["contact"].replace(",","")
-              if re.fullmatch(one_mail_pattern, contact) or re.fullmatch(multiple_mail_pattern, contact):
+              if re.fullmatch(one_mail_pattern, multiple_contacts) or re.fullmatch(multiple_mail_pattern, multiple_contacts):
                   valid_contacts.append(device)
               elif re.fullmatch(multiple_mail_pattern, device.cf["contact"]):
                   valid_contacts.append(device) 
