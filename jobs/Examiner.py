@@ -90,7 +90,7 @@ class VerifyEOL(Job) :
           if isinstance(seperated_mail, list):
               for contact in seperated_mail[0]:
                   mail = contact.replace(",","")
-              split_contacts.append([mail,contact_with_device[-1]])
+                  split_contacts.append([mail,contact_with_device[-1]])
           else:
              split_contacts.append([seperated_mail,contact_with_device[-1]])
             
