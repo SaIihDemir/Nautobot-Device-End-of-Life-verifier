@@ -38,17 +38,20 @@ class VerifyEOL(Job) :
       else:
          self.log_failure(obj=None, message = "no obsolete Device found")
        
-#exclude contact-information that has typos into seperate list
+#exclude contacts with typos into seperate list
       contacts_with_typos = []
       valid_contacts = []
       for device in sorted_devices:
-          pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
-          if re.fullmatch(pattern, device.cf["contact"]):
-               valid_contacts.append(device)
+          one_mail_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'
+          multiple_mail_pattern = pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+(?:\s+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)*$'
+          if re.fullmatch(one_mail_pattern, device.cf["contact"]):
+              valid_contacts.append(device)
+          elif re.fullmatch(multiple_mail_pattern, device.cf["contact"])
+              valid_contacts.append(device)
           else:
-              multiple_contacts = re.split(r"[\s]\s*", device.cf["contact"])
+              multiple_contacts = device.cf["contact"].replace(",",""))
               for contact in multiple_contacts:
-                  if re.fullmatch(pattern, contact):
+                  if re.fullmatch(one_mail_pattern, contact) or re.fullmatch(multiple_mail_pattern, contact):
                       valid_contacts.append(device)
                   else:
                       contacts_with_typos.append(device)
